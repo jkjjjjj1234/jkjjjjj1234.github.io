@@ -1,6 +1,17 @@
 import Layout from '../components/Layout'
 import Hero from '../components/Hero'
 import SectionTitle from '../components/SectionTitle'
+import CareerCard from '../components/CareerCard'
+import SkillGroup, { type SkillLevel } from '../components/SkillGroup'
+import ProjectCard from '../components/ProjectCard'
+import DocumentCard from '../components/DocumentCard'
+import { careerData } from '../data/career'
+import { skillCategories } from '../data/skills'
+import { projects } from '../data/projects'
+import { certifications } from '../data/certifications'
+
+const CONTACT_EMAIL = 'jkjjjjj1234@naver.com'
+const GITHUB_URL = 'https://github.com/jkjjjjj1234'
 
 const ABOUT_KEYWORDS = [
   {
@@ -44,12 +55,7 @@ const OPERATION_PRINCIPLES = [
   },
 ]
 
-const PLACEHOLDER_SECTIONS = [
-  { id: 'career', title: 'Career' },
-  { id: 'skills', title: 'Skills' },
-  { id: 'projects', title: 'Projects' },
-  { id: 'contact', title: 'Contact' },
-]
+const SKILL_LEVELS: SkillLevel[] = ['primary', 'secondary', 'tertiary']
 
 function Home() {
   return (
@@ -98,15 +104,131 @@ function Home() {
         </div>
       </section>
 
-      {PLACEHOLDER_SECTIONS.map((section) => (
-        <section
-          key={section.id}
-          id={section.id}
-          className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24"
-        >
-          <SectionTitle title={section.title} />
-        </section>
-      ))}
+      <section id="career" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
+        <SectionTitle
+          eyebrow="Career"
+          title="Career Summary"
+          description="병원 IT 인프라 운영을 중심으로, 서버 H/W 구축과 그룹웨어·NAS 도입 경험을 쌓아왔습니다."
+        />
+        <div className="mt-10 space-y-6">
+          {careerData
+            .filter((entry) => entry.highlight)
+            .map((entry) => (
+              <CareerCard key={entry.id} entry={entry} />
+            ))}
+        </div>
+        <div className="mt-10">
+          <h3 className="text-sm font-semibold tracking-wide text-slate-light uppercase">
+            Other Experience
+          </h3>
+          <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+            {careerData
+              .filter((entry) => !entry.highlight)
+              .map((entry) => (
+                <CareerCard key={entry.id} entry={entry} />
+              ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="skills" className="bg-light-gray">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
+          <SectionTitle
+            eyebrow="Skills"
+            title="Core Skills"
+            description="실무에서 운영한 경험부터 직접 구축·도입한 경험, 개인 프로젝트로 확장 중인 영역까지 수준별로 구분했습니다."
+          />
+          <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-3">
+            {skillCategories.map((category, index) => (
+              <SkillGroup key={category.id} category={category} level={SKILL_LEVELS[index]} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
+        <SectionTitle
+          eyebrow="Projects"
+          title="Featured Projects"
+          description="실무에서 수행한 인프라 구축·운영 프로젝트와 개인적으로 확장 중인 모니터링 프로젝트입니다."
+        />
+        <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {projects.map((project) => (
+            <ProjectCard key={project.id} project={project} />
+          ))}
+        </div>
+      </section>
+
+      <section className="bg-light-gray">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
+          <SectionTitle eyebrow="Certifications" title="자격증" />
+          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3">
+            {certifications
+              .filter((cert) => cert.featured)
+              .map((cert) => (
+                <div key={cert.id} className="rounded-lg bg-white p-5 shadow-sm">
+                  <h3 className="font-semibold text-navy">{cert.name}</h3>
+                  <p className="mt-1 text-sm text-slate">{cert.issuer}</p>
+                  <p className="mt-1 text-xs text-slate-light">{cert.date}</p>
+                </div>
+              ))}
+          </div>
+          <details className="mt-6 rounded-lg bg-white p-5 shadow-sm">
+            <summary className="cursor-pointer text-sm font-semibold text-slate">
+              기타 자격증 더 보기 (
+              {certifications.filter((cert) => !cert.featured).length})
+            </summary>
+            <ul className="mt-4 space-y-2 text-sm text-slate">
+              {certifications
+                .filter((cert) => !cert.featured)
+                .map((cert) => (
+                  <li key={cert.id} className="flex flex-wrap justify-between gap-2">
+                    <span>
+                      {cert.name} · {cert.issuer}
+                    </span>
+                    <span className="text-slate-light">{cert.date}</span>
+                  </li>
+                ))}
+            </ul>
+          </details>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
+        <SectionTitle eyebrow="Documents" title="문서" />
+        <div className="mt-10">
+          <DocumentCard
+            title="Uptime Kuma 프로젝트 포트폴리오"
+            description="개인 인프라 모니터링 프로젝트의 구축 배경, 아키텍처, 보안 설계, 운영 결과를 정리한 문서입니다."
+            href="/documents/uptime-kuma-portfolio.pdf"
+          />
+        </div>
+      </section>
+
+      <section id="contact" className="bg-navy">
+        <div className="mx-auto max-w-6xl px-4 py-16 text-center sm:px-6 lg:py-24">
+          <SectionTitle eyebrow="Contact" title="연락하기" tone="light" />
+          <p className="mx-auto mt-3 max-w-xl text-slate-light">
+            프로젝트나 채용 관련 문의는 이메일로 연락해 주세요.
+          </p>
+          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <a
+              href={`mailto:${CONTACT_EMAIL}`}
+              className="rounded-md bg-accent px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-light"
+            >
+              {CONTACT_EMAIL}
+            </a>
+            <a
+              href={GITHUB_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-md border border-light-gray px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-navy-dark"
+            >
+              GitHub 보기
+            </a>
+          </div>
+        </div>
+      </section>
     </Layout>
   )
 }

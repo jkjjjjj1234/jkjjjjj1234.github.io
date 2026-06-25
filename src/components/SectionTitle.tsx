@@ -2,18 +2,29 @@ interface SectionTitleProps {
   eyebrow?: string
   title: string
   description?: string
+  tone?: 'dark' | 'light'
 }
 
-function SectionTitle({ eyebrow, title, description }: SectionTitleProps) {
+function SectionTitle({ eyebrow, title, description, tone = 'dark' }: SectionTitleProps) {
+  const isLight = tone === 'light'
+
   return (
     <div className="mx-auto max-w-2xl text-center">
       {eyebrow && (
-        <p className="mb-2 text-sm font-semibold tracking-wide text-accent uppercase">
+        <p
+          className={`mb-2 text-sm font-semibold tracking-wide uppercase ${
+            isLight ? 'text-accent-light' : 'text-accent'
+          }`}
+        >
           {eyebrow}
         </p>
       )}
-      <h2 className="text-2xl font-bold text-navy sm:text-3xl">{title}</h2>
-      {description && <p className="mt-3 text-slate">{description}</p>}
+      <h2 className={`text-2xl font-bold sm:text-3xl ${isLight ? 'text-white' : 'text-navy'}`}>
+        {title}
+      </h2>
+      {description && (
+        <p className={`mt-3 ${isLight ? 'text-slate-light' : 'text-slate'}`}>{description}</p>
+      )}
     </div>
   )
 }
