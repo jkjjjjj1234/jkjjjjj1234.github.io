@@ -18,6 +18,9 @@ dist-ssr
 .idea
 .claude/
 .DS_Store
+
+# 내부 기획 문서 (사이트 콘텐츠 아님, 공개 저장소에 미포함)
+포트폴리오_작업지시서_단계별.md
 *.suo
 *.ntvs*
 *.njsproj
