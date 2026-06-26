@@ -1,7 +1,10 @@
-import type { ReactNode } from 'react'
+import { useState, type ReactNode } from 'react'
+import { ZoomIn } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import Layout from '../../components/Layout'
 import DocumentCard from '../../components/DocumentCard'
+import Lightbox from '../../components/Lightbox'
+import { useScrollReveal } from '../../hooks/useScrollReveal'
 
 const TECH_STACK = ['Oracle Cloud', 'Oracle Linux 9', 'Docker', 'Uptime Kuma', 'Tailscale', 'Telegram Bot']
 
@@ -86,7 +89,7 @@ interface DetailSectionProps {
 
 function DetailSection({ eyebrow, title, children }: DetailSectionProps) {
   return (
-    <section className="mx-auto max-w-4xl px-4 py-10 sm:px-6">
+    <section className="mx-auto max-w-4xl px-4 py-10 sm:px-6 reveal">
       <p className="text-sm font-semibold tracking-wide text-accent uppercase">{eyebrow}</p>
       <h2 className="mt-1 text-xl font-bold text-navy sm:text-2xl">{title}</h2>
       <div className="mt-5 text-left">{children}</div>
@@ -139,18 +142,48 @@ function InfoTable({ head, rows }: { head: string[]; rows: string[][] }) {
   )
 }
 
-function ImageBlock({ src, alt, caption }: { src: string; alt: string; caption: string }) {
+function ImageBlock({
+  src,
+  alt,
+  caption,
+  onOpen,
+}: {
+  src: string
+  alt: string
+  caption: string
+  onOpen: (src: string, alt: string) => void
+}) {
   return (
     <figure className="rounded-lg border border-light-gray p-2">
-      <img src={src} alt={alt} className="w-full rounded-md" loading="lazy" />
+      <button
+        type="button"
+        className="group relative block w-full cursor-zoom-in"
+        onClick={() => onOpen(src, alt)}
+        aria-label={`${alt} 크게 보기`}
+      >
+        <img src={src} alt={alt} className="w-full rounded-md" loading="lazy" />
+        <div className="absolute inset-0 flex items-center justify-center rounded-md bg-black/0 transition-colors group-hover:bg-black/20">
+          <ZoomIn
+            size={36}
+            className="text-white opacity-0 drop-shadow transition-opacity group-hover:opacity-100"
+          />
+        </div>
+      </button>
       <figcaption className="mt-2 px-2 pb-1 text-sm text-slate-light">{caption}</figcaption>
     </figure>
   )
 }
 
 function UptimeKuma() {
+  useScrollReveal()
+  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null)
+  const openLightbox = (src: string, alt: string) => setLightbox({ src, alt })
+
   return (
     <Layout>
+      {lightbox && (
+        <Lightbox src={lightbox.src} alt={lightbox.alt} onClose={() => setLightbox(null)} />
+      )}
       <div className="mx-auto max-w-4xl px-4 pt-12 sm:px-6">
         <Link to="/" className="text-sm font-medium text-accent hover:text-accent-light">
           ← 메인으로
@@ -243,6 +276,7 @@ function UptimeKuma() {
           src="/images/uptime-architecture.png"
           alt="개인 인프라 모니터링 시스템 구성도"
           caption="공개 가능한 수준으로 추상화한 설계도. 실제 공인 IP·Tailscale IP·Telegram Bot Token·장비 고유명 등 민감정보는 문서·공개 페이지에서 제외했습니다."
+          onOpen={openLightbox}
         />
       </DetailSection>
 
@@ -267,6 +301,7 @@ function UptimeKuma() {
             src="/images/telegram-alert.png"
             alt="Telegram을 통한 장애 발생 및 복구 알림 캡처"
             caption="장애 발생(Down) 및 복구(Up) 시 Telegram Bot으로 즉시 알림을 수신합니다."
+            onOpen={openLightbox}
           />
         </div>
       </DetailSection>
@@ -278,11 +313,13 @@ function UptimeKuma() {
             src="/images/uptime-dashboard.jpeg"
             alt="Uptime Kuma 대시보드 화면"
             caption="모니터링 대상 전체의 온라인 상태와 응답 이력을 확인하는 대시보드입니다."
+            onOpen={openLightbox}
           />
           <ImageBlock
             src="/images/uptime-monitor-detail.jpeg"
             alt="Uptime Kuma 모니터 상세 화면"
             caption="개별 모니터의 응답 시간, 업타임, 인증서 만료일 등 상세 지표입니다."
+            onOpen={openLightbox}
           />
         </div>
         <div className="mt-4">
@@ -290,6 +327,7 @@ function UptimeKuma() {
             src="/images/uptime-status-page.jpeg"
             alt="Uptime Kuma 공개 상태 페이지"
             caption="외부에 공개 가능한 형태로 구성한 Status Page입니다."
+            onOpen={openLightbox}
           />
         </div>
       </DetailSection>

@@ -36,19 +36,15 @@ function ProjectCard({ project }: ProjectCardProps) {
         ))}
       </ul>
 
-      <div className="mt-auto flex items-center justify-between gap-3 pt-6 text-sm">
-        <span className="text-slate-light">Contribution {project.contribution}</span>
-        {project.hasDetailPage ? (
+      <div className={`mt-auto pt-6 text-sm ${project.hasDetailPage ? 'flex items-center justify-between gap-3' : ''}`}>
+        <span className="text-slate-light">기여도 {project.contribution}</span>
+        {project.hasDetailPage && (
           <Link
             to={project.path}
             className="shrink-0 rounded-md bg-accent px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-accent-light"
           >
             상세 보기
           </Link>
-        ) : (
-          <span className="shrink-0 rounded-md bg-light-gray px-4 py-2 text-sm font-medium text-slate-light">
-            상세 페이지 준비 중
-          </span>
         )}
       </div>
     </div>

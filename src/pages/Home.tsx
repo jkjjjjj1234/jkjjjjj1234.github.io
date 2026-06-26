@@ -1,4 +1,5 @@
 import Layout from '../components/Layout'
+import { useScrollReveal } from '../hooks/useScrollReveal'
 import Hero from '../components/Hero'
 import SectionTitle from '../components/SectionTitle'
 import CareerCard from '../components/CareerCard'
@@ -15,8 +16,8 @@ const GITHUB_URL = 'https://github.com/jkjjjjj1234'
 
 const ABOUT_KEYWORDS = [
   {
-    title: '사내 IT 인프라 전체 운영',
-    description: '19층 규모 병원 빌딩의 IT 인프라를 처음부터 끝까지 책임지고 운영합니다.',
+    title: '온프레미스 인프라 전체 운영',
+    description: '서버·네트워크·보안·백업·모니터링 전 영역을 처음부터 끝까지 직접 책임지고 운영합니다.',
   },
   {
     title: '장애 대응·원인 분석',
@@ -55,18 +56,20 @@ const OPERATION_PRINCIPLES = [
   },
 ]
 
-const SKILL_LEVELS: SkillLevel[] = ['primary', 'secondary', 'tertiary']
+const SKILL_LEVELS: SkillLevel[] = ['primary', 'secondary', 'tertiary', 'quaternary']
 
 function Home() {
+  useScrollReveal()
+
   return (
     <Layout>
       <Hero />
 
-      <section id="about" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
+      <section id="about" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24 reveal">
         <SectionTitle
           eyebrow="About"
-          title="병원 IT 인프라를 책임지는 시스템 엔지니어"
-          description="병원 빌딩의 사내 IT 인프라를 전체적으로 운영하며, 장애가 발생하면 원인을 분석하고 재발을 방지하는 구조로 개선해왔습니다. 서버·NAS·네트워크·보안·백업·CCTV 등 다양한 영역을 다루면서도, 현장에서 사용자를 직접 지원하고 문제를 해결하는 것을 우선으로 삼았습니다."
+          title="인프라 전반을 직접 운영하고 개선하는 시스템 엔지니어"
+          description="서버·NAS·네트워크·보안·백업·CCTV 등 온프레미스 인프라 전 영역을 직접 운영하며, 장애 원인을 분석하고 재발을 방지하는 구조로 꾸준히 개선해왔습니다. 병원·데이터센터 등 다양한 현장을 거치며 사용자 지원과 인프라 안정화를 함께 추진했습니다."
         />
         <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {ABOUT_KEYWORDS.map((keyword) => (
@@ -82,7 +85,7 @@ function Home() {
       </section>
 
       <section className="bg-light-gray">
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24 reveal">
           <SectionTitle
             eyebrow="Operation Philosophy"
             title="운영은 복구에서 끝나지 않고, 재발 방지로 완성된다고 생각합니다."
@@ -104,7 +107,7 @@ function Home() {
         </div>
       </section>
 
-      <section id="career" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
+      <section id="career" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24 reveal">
         <SectionTitle
           eyebrow="Career"
           title="Career Summary"
@@ -132,13 +135,13 @@ function Home() {
       </section>
 
       <section id="skills" className="bg-light-gray">
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24 reveal">
           <SectionTitle
             eyebrow="Skills"
             title="Core Skills"
             description="실무에서 운영한 경험부터 직접 구축·도입한 경험, 개인 프로젝트로 확장 중인 영역까지 수준별로 구분했습니다."
           />
-          <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-3">
+          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
             {skillCategories.map((category, index) => (
               <SkillGroup key={category.id} category={category} level={SKILL_LEVELS[index]} />
             ))}
@@ -146,7 +149,7 @@ function Home() {
         </div>
       </section>
 
-      <section id="projects" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
+      <section id="projects" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24 reveal">
         <SectionTitle
           eyebrow="Projects"
           title="Featured Projects"
@@ -160,41 +163,29 @@ function Home() {
       </section>
 
       <section className="bg-light-gray">
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24 reveal">
           <SectionTitle eyebrow="Certifications" title="자격증" />
-          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3">
-            {certifications
-              .filter((cert) => cert.featured)
-              .map((cert) => (
-                <div key={cert.id} className="rounded-lg bg-white p-5 shadow-sm">
-                  <h3 className="font-semibold text-navy">{cert.name}</h3>
-                  <p className="mt-1 text-sm text-slate">{cert.issuer}</p>
-                  <p className="mt-1 text-xs text-slate-light">{cert.date}</p>
-                </div>
-              ))}
-          </div>
-          <details className="mt-6 rounded-lg bg-white p-5 shadow-sm">
-            <summary className="cursor-pointer text-sm font-semibold text-slate">
-              기타 자격증 더 보기 (
-              {certifications.filter((cert) => !cert.featured).length})
-            </summary>
-            <ul className="mt-4 space-y-2 text-sm text-slate">
-              {certifications
-                .filter((cert) => !cert.featured)
+          <div className="relative mt-10 mx-auto max-w-lg">
+            <div className="absolute left-[5px] top-2 bottom-2 w-px bg-slate-light/40" />
+            <ol className="space-y-7">
+              {[...certifications]
+                .sort((a, b) => b.date.localeCompare(a.date))
                 .map((cert) => (
-                  <li key={cert.id} className="flex flex-wrap justify-between gap-2">
-                    <span>
-                      {cert.name} · {cert.issuer}
-                    </span>
-                    <span className="text-slate-light">{cert.date}</span>
+                  <li key={cert.id} className="relative pl-8">
+                    <span className="absolute left-0 top-1 h-[11px] w-[11px] rounded-full border-2 border-accent bg-white" />
+                    <time className="block text-xs font-medium tracking-wide text-slate-light">
+                      {cert.date}
+                    </time>
+                    <p className="mt-0.5 text-sm font-semibold text-navy">{cert.name}</p>
+                    <p className="text-xs text-slate">{cert.issuer}</p>
                   </li>
                 ))}
-            </ul>
-          </details>
+            </ol>
+          </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
+      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24 reveal">
         <SectionTitle eyebrow="Documents" title="문서" />
         <div className="mt-10">
           <DocumentCard
@@ -206,7 +197,7 @@ function Home() {
       </section>
 
       <section id="contact" className="bg-navy">
-        <div className="mx-auto max-w-6xl px-4 py-16 text-center sm:px-6 lg:py-24">
+        <div className="mx-auto max-w-6xl px-4 py-16 text-center sm:px-6 lg:py-24 reveal">
           <SectionTitle eyebrow="Contact" title="연락하기" tone="light" />
           <p className="mx-auto mt-3 max-w-xl text-slate-light">
             프로젝트나 채용 관련 문의는 이메일로 연락해 주세요.

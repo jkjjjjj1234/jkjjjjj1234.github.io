@@ -55,13 +55,25 @@ export const skillCategories: SkillCategory[] = [
     description: '온프레미스 경험을 기반으로 개인 인프라 환경에서 확장 중인 영역',
     items: [
       'Oracle Cloud',
-      'Oracle Linux 9',
       'Docker',
       'Uptime Kuma',
       'Tailscale',
       'Telegram Alert',
       'GitHub',
       'GitHub Pages',
+    ],
+  },
+  {
+    id: 'ai',
+    title: 'AI 활용 / 개발 보조',
+    description: 'AI 도구를 활용한 개발 보조 및 업무 자동화 경험',
+    items: [
+      'Vibe Coding',
+      'ChatGPT',
+      'Codex',
+      'Claude',
+      'Claude Code',
+      'Gemini',
     ],
   },
 ]

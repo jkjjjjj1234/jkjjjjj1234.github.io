@@ -1,6 +1,7 @@
 import type { SkillCategory } from '../data/skills'
+import { skillIcons } from '../data/skillIcons'
 
-export type SkillLevel = 'primary' | 'secondary' | 'tertiary'
+export type SkillLevel = 'primary' | 'secondary' | 'tertiary' | 'quaternary'
 
 interface SkillGroupProps {
   category: SkillCategory
@@ -8,9 +9,10 @@ interface SkillGroupProps {
 }
 
 const LEVEL_STYLES: Record<SkillLevel, { chip: string; label: string }> = {
-  primary: { chip: 'bg-navy text-white', label: '실무 운영' },
-  secondary: { chip: 'border border-accent text-accent', label: '구축·도입' },
-  tertiary: { chip: 'border border-dashed border-slate-light text-slate', label: '확장 중' },
+  primary:    { chip: 'bg-navy text-white',                              label: '실무 운영' },
+  secondary:  { chip: 'border border-accent text-accent',                label: '구축·도입' },
+  tertiary:   { chip: 'border border-dashed border-slate-light text-slate', label: '확장 중' },
+  quaternary: { chip: 'border border-dashed border-navy text-navy',      label: 'AI 활용' },
 }
 
 function SkillGroup({ category, level }: SkillGroupProps) {
@@ -27,7 +29,11 @@ function SkillGroup({ category, level }: SkillGroupProps) {
       <p className="mt-1 text-sm text-slate">{category.description}</p>
       <div className="mt-4 flex flex-wrap gap-2">
         {category.items.map((item) => (
-          <span key={item} className={`rounded-full px-3 py-1 text-xs font-medium ${styles.chip}`}>
+          <span
+            key={item}
+            className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium ${styles.chip}`}
+          >
+            {skillIcons[item]}
             {item}
           </span>
         ))}

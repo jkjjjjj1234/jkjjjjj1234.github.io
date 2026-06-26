@@ -71,4 +71,19 @@ export const projects: Project[] = [
     path: '/projects/wordpress-privacy',
     hasDetailPage: false,
   },
+  {
+    id: 'portfolio-site',
+    title: '개인 포트폴리오 사이트 구축 및 배포 자동화',
+    summary: 'AI 기반 바이브 코딩으로 정적 포트폴리오 사이트를 제작하고 GitHub Pages·Actions로 배포·운영',
+    role: '설계·제작·배포 전담',
+    stack: ['Vite', 'React', 'TypeScript', 'Tailwind CSS', 'Git', 'GitHub Actions', 'GitHub Pages'],
+    highlights: [
+      'AI 도구 활용 제작',
+      'Git·GitHub 버전관리 및 자동 배포',
+      '검색 비노출·민감정보 제거 등 운영 관점 반영',
+    ],
+    contribution: '100%',
+    path: '',
+    hasDetailPage: false,
+  },
 ]
