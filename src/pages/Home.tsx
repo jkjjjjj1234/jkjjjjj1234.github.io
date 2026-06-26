@@ -6,10 +6,10 @@ import CareerCard from '../components/CareerCard'
 import SkillGroup, { type SkillLevel } from '../components/SkillGroup'
 import ProjectCard from '../components/ProjectCard'
 import DocumentCard from '../components/DocumentCard'
+import CertificationTimeline from '../components/CertificationTimeline'
 import { careerData } from '../data/career'
 import { skillCategories } from '../data/skills'
 import { projects } from '../data/projects'
-import { certifications } from '../data/certifications'
 
 const CONTACT_EMAIL = 'jkjjjjj1234@naver.com'
 const GITHUB_URL = 'https://github.com/jkjjjjj1234'
@@ -165,23 +165,7 @@ function Home() {
       <section className="bg-light-gray">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24 reveal">
           <SectionTitle eyebrow="Certifications" title="자격증" />
-          <div className="relative mt-10 mx-auto max-w-lg">
-            <div className="absolute left-[5px] top-2 bottom-2 w-px bg-slate-light/40" />
-            <ol className="space-y-7">
-              {[...certifications]
-                .sort((a, b) => b.date.localeCompare(a.date))
-                .map((cert) => (
-                  <li key={cert.id} className="relative pl-8">
-                    <span className="absolute left-0 top-1 h-[11px] w-[11px] rounded-full border-2 border-accent bg-white" />
-                    <time className="block text-xs font-medium tracking-wide text-slate-light">
-                      {cert.date}
-                    </time>
-                    <p className="mt-0.5 text-sm font-semibold text-navy">{cert.name}</p>
-                    <p className="text-xs text-slate">{cert.issuer}</p>
-                  </li>
-                ))}
-            </ol>
-          </div>
+          <CertificationTimeline />
         </div>
       </section>
 
