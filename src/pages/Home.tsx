@@ -88,7 +88,7 @@ function Home() {
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24 reveal">
           <SectionTitle
             eyebrow="Operation Philosophy"
-            title="운영은 복구에서 끝나지 않고, 재발 방지로 완성된다고 생각합니다."
+            title={<>운영은 복구에서 끝나지 않고,<br />재발 방지로 완성된다고 생각합니다.</>}
           />
           <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
             {OPERATION_PRINCIPLES.map((principle, index) => (

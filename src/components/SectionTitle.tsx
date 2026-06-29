@@ -1,6 +1,8 @@
+import type { ReactNode } from 'react'
+
 interface SectionTitleProps {
   eyebrow?: string
-  title: string
+  title: ReactNode
   description?: string
   tone?: 'dark' | 'light'
 }

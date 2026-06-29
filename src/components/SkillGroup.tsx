@@ -20,9 +20,9 @@ function SkillGroup({ category, level }: SkillGroupProps) {
 
   return (
     <div className="rounded-lg bg-white p-6 shadow-sm">
-      <div className="flex items-center justify-between gap-2">
-        <h3 className="font-semibold text-navy">{category.title}</h3>
-        <span className="rounded-full bg-light-gray px-2 py-0.5 text-xs font-medium text-slate">
+      <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+        <h3 className="[word-break:keep-all] font-semibold text-navy">{category.title}</h3>
+        <span className="shrink-0 rounded-full bg-light-gray px-2 py-0.5 text-xs font-medium text-slate">
           {styles.label}
         </span>
       </div>
