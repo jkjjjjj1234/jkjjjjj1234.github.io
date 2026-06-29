@@ -162,7 +162,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="bg-light-gray">
+      <section id="certifications" className="bg-light-gray">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24 reveal">
           <SectionTitle eyebrow="Certifications" title="자격증" />
           <CertificationTimeline />
