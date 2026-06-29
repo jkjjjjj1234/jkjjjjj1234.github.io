@@ -19,11 +19,13 @@ function SectionTitle({ eyebrow, title, description, tone = 'dark' }: SectionTit
           {eyebrow}
         </p>
       )}
-      <h2 className={`text-2xl font-bold sm:text-3xl ${isLight ? 'text-white' : 'text-navy'}`}>
+      <h2
+        className={`[word-break:keep-all] [text-wrap:balance] text-2xl font-bold sm:text-3xl ${isLight ? 'text-white' : 'text-navy'}`}
+      >
         {title}
       </h2>
       {description && (
-        <p className={`mt-3 ${isLight ? 'text-slate-light' : 'text-slate'}`}>{description}</p>
+        <p className={`mt-3 [word-break:keep-all] [text-wrap:pretty] ${isLight ? 'text-slate-light' : 'text-slate'}`}>{description}</p>
       )}
     </div>
   )

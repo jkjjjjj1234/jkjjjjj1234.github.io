@@ -7,10 +7,15 @@ function Hero() {
     <section id="hero" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
       <div className="flex flex-col items-center gap-10 lg:flex-row lg:justify-between">
         <div className="max-w-2xl text-center lg:text-left">
-          <h1 className="text-3xl font-bold text-navy sm:text-4xl lg:text-5xl">
-            서버·네트워크·보안·백업·모니터링을 직접 운영하고 개선하는 시스템 엔지니어 조대훈입니다.
+          <h1
+            className="[word-break:keep-all] font-bold text-navy"
+            style={{ fontSize: 'clamp(1.5rem, 3vw + 0.75rem, 3rem)' }}
+          >
+            서버·네트워크·보안·백업·모니터링을 직접 운영하고
+            <br className="hidden sm:block" />
+            {' '}개선하는 시스템 엔지니어 조대훈입니다.
           </h1>
-          <div className="mt-6 space-y-4 text-base text-slate sm:text-lg">
+          <div className="mt-6 space-y-4 text-base text-slate sm:text-lg [word-break:keep-all] [text-wrap:pretty]">
             <p>
               서버·NAS·네트워크·CCTV·보안 솔루션까지 온프레미스 IT 인프라 전반을 직접 운영하며
               장애 발생 시 신속한 복구와 재발 방지에 집중해왔습니다. 병원 빌딩·데이터센터 등
@@ -30,7 +35,7 @@ function Hero() {
             <button
               type="button"
               onClick={() => scrollToSection('projects')}
-              className="rounded-md bg-accent px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-light"
+              className="cursor-pointer rounded-md bg-accent px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-light"
             >
               주요 프로젝트 보기
             </button>

@@ -41,7 +41,7 @@ function Layout({ children }: LayoutProps) {
                 <button
                   type="button"
                   onClick={() => handleNavClick(item.id)}
-                  className="text-sm font-medium text-slate transition-colors hover:text-accent"
+                  className="cursor-pointer text-sm font-medium text-slate transition-colors hover:text-accent"
                 >
                   {item.label}
                 </button>
@@ -51,7 +51,7 @@ function Layout({ children }: LayoutProps) {
 
           <button
             type="button"
-            className="flex flex-col gap-1.5 md:hidden"
+            className="cursor-pointer flex flex-col gap-1.5 md:hidden"
             aria-label="메뉴 열기"
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen((open) => !open)}
@@ -69,7 +69,7 @@ function Layout({ children }: LayoutProps) {
                 <button
                   type="button"
                   onClick={() => handleNavClick(item.id)}
-                  className="w-full rounded px-2 py-2 text-left text-sm font-medium text-slate hover:bg-light-gray hover:text-accent"
+                  className="cursor-pointer w-full rounded px-2 py-2 text-left text-sm font-medium text-slate hover:bg-light-gray hover:text-accent"
                 >
                   {item.label}
                 </button>

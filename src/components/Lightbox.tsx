@@ -29,7 +29,7 @@ function Lightbox({ src, alt, onClose }: LightboxProps) {
       <button
         type="button"
         onClick={onClose}
-        className="absolute right-4 top-4 rounded-full bg-white/10 p-2 text-white transition-colors hover:bg-white/25"
+        className="cursor-pointer absolute right-4 top-4 rounded-full bg-white/10 p-2 text-white transition-colors hover:bg-white/25"
         aria-label="닫기"
       >
         <X size={20} />
